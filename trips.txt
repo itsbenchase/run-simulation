@@ -1,0 +1,12 @@
+route_id,service_id,trip_id,trip_headsign,useless
+1,reg,1,1 - test,1
+1,reg,2,1 - test,1
+1,reg,3,1 - test,1
+1,reg,4,1 - test,1
+1,reg,11,1 - test,1
+2,reg,5,2 - test 2,2
+2,reg,6,2 - test 2,2
+2,reg,7,2 - test 2,2
+2,reg,8,2 - test 2,2
+2,reg,9,2 - test 2,2
+2,reg,10,2 - test 2,2
