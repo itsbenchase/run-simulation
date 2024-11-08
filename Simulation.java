@@ -302,6 +302,13 @@ public class Simulation
 
                 if (tripStops.contains(legEnd.get(j)))
                 {
+                    for (int l = 0; l < stopName.size(); l++)
+                    {
+                        if (legStart.get(j).equals(stopID.get(l)))
+                        {
+                            System.out.println(stopName.get(l) + " (dep.) - " + possibleTimes.get(k).toString());
+                        }
+                    }
                     break;
                 }
             }
@@ -315,6 +322,13 @@ public class Simulation
                     {
                         if (j == (legEnd.size() - 1))
                         {
+                            for (int k = 0; k < stopName.size(); k++)
+                            {
+                                if (runningStopTimes.get(i).equals(stopID.get(k)))
+                                {
+                                    System.out.println(stopName.get(k) + " (arr.) - " + runningDepTimes.get(i).toString());
+                                }
+                            }
                             endTime = runningDepTimes.get(i);
                         }
                         else
@@ -323,7 +337,7 @@ public class Simulation
                             {
                                 if (runningStopTimes.get(i).equals(stopID.get(k)))
                                 {
-                                    System.out.println(stopName.get(k) + " - " + runningDepTimes.get(i).toString());
+                                    System.out.println(stopName.get(k) + " (arr.) - " + runningDepTimes.get(i).toString());
                                 }
                             }
                             startTimeInput = runningDepTimes.get(i);
