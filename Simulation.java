@@ -155,8 +155,46 @@ public class Simulation
             transfer at stop 1
         */
 
-        int date = 20240101; /// yyyymmdd
-        int dayOfWeek = 0; // 0-6, mon-sun
+        int date = 20240101; /// yyyymmdd - placeholder
+        int dayOfWeek = 0; // 0-6, mon-sun - placeholder
+
+        String startTimeInput = "00:00"; // must be 24 hour format
+        
+        String runId = "no run";
+        ArrayList<String> legStart = new ArrayList<String>();
+        ArrayList<String> legEnd = new ArrayList<String>();
+
+        // get run info (prompt for run id)
+
+        System.out.print("Enter Run ID: ");
+        runId = in.nextLine();
+
+        try
+        {
+            Scanner s = new Scanner(new File("run_" + runId + ".txt"));
+            while (s.hasNextLine())
+            {
+                String data = s.nextLine();
+                legStart.add(data.substring(0, data.indexOf(",")));
+                data = data.substring(data.indexOf(",") + 1);
+                legEnd.add(data);
+            }
+        }
+        catch (Exception e)
+        {
+            // nothing for now, but this is error
+        }
+
+        // prompt for day of week (this is something ran internally by staff, so don't stress with formatting)
+        // prompt for start time (run_0001 test time is 06:49)
+
+        System.out.print("Enter Date: ");
+        date = in.nextInt();
+
+        System.out.print("Enter Day of Week: ");
+        dayOfWeek = in.nextInt();
+
+        in.nextLine(); // absorb enter
 
         // stop_times and trip imports based on what is running that day
         ArrayList<String> runningServices = new ArrayList<String>();
@@ -201,44 +239,6 @@ public class Simulation
                 }
             }
         }
-
-        String startTimeInput = "00:00"; // must be 24 hour format
-        
-        String runId = "no run";
-        ArrayList<String> legStart = new ArrayList<String>();
-        ArrayList<String> legEnd = new ArrayList<String>();
-
-        // get run info (prompt for run id)
-
-        System.out.print("Enter Run ID: ");
-        runId = in.nextLine();
-
-        try
-        {
-            Scanner s = new Scanner(new File("run_" + runId + ".txt"));
-            while (s.hasNextLine())
-            {
-                String data = s.nextLine();
-                legStart.add(data.substring(0, data.indexOf(",")));
-                data = data.substring(data.indexOf(",") + 1);
-                legEnd.add(data);
-            }
-        }
-        catch (Exception e)
-        {
-            // nothing for now, but this is error
-        }
-
-        // prompt for day of week (this is something ran internally by staff, so don't stress with formatting)
-        // prompt for start time (run_0001 test time is 06:49)
-
-        System.out.print("Enter Date: ");
-        date = in.nextInt();
-
-        System.out.print("Enter Day of Week: ");
-        dayOfWeek = in.nextInt();
-
-        in.nextLine(); // absorb enter
 
         System.out.print("Enter Start Time: ");
         startTimeInput = in.nextLine();
