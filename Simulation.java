@@ -290,7 +290,7 @@ public class Simulation
                 {
                     if (runningStopTimes.get(i).equals(legStart.get(j)))
                     {
-                        if (tripTime.equals(runningDepTimes.get(i)))
+                        if (tripTime.substring(0,5).equals(runningDepTimes.get(i).substring(0,5)))
                         {
                             currentTrip = runningTripTimes.get(i);
                             break;
