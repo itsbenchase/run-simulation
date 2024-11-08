@@ -22,4 +22,4 @@ Day of Week: Day of week run was attempted on. Takes a number from 0 to 6, 0 rep
 
 Start Time: Time run was started. Required to be at least 1 minute before first train departure.
 
-Software will print out expected start and ending times based off the GTFS schedule for the day the run was attempted.
+Software will print out expected start and ending times based off the GTFS schedule for the day the run was attempted, as well as times at transfer points.
