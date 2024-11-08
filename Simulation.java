@@ -91,6 +91,33 @@ public class Simulation
             System.out.println("Error - no trips.txt.");
         }
 
+        ArrayList<String> stopID = new ArrayList<String>();
+        ArrayList<String> stopName = new ArrayList<String>();
+        try
+        {
+            Scanner s = new Scanner(new File("stops.txt"));
+            int z = 0; // skip first
+            while (s.hasNextLine())
+            {
+                if (z == 0)
+                {
+                    s.nextLine();
+                    z++;
+                }
+                else
+                {
+                    String data = s.nextLine();
+                    stopID.add(data.substring(0, data.indexOf(",")));
+                    data = data.substring(data.indexOf(",") + 1);
+                    stopName.add(data.substring(0, data.indexOf(",")));
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error - no stops.txt.");
+        }
+
         ArrayList<String> tripIDtimes = new ArrayList<String>();
         ArrayList<String> departuretimes = new ArrayList<String>();
         ArrayList<String> stopIDtimes = new ArrayList<String>();
@@ -231,7 +258,7 @@ public class Simulation
                     LocalTime compareTime = LocalTime.parse(runningDepTimes.get(i));
                     // 0 is equal time, 1 is time before, -1 is time after
                     int compValue = startTime.compareTo(compareTime);
-                    if (compValue < 0)
+                    if (compValue <= 0)
                     {
                         possibleTimes.add(compareTime.toString());
                     }
@@ -292,6 +319,13 @@ public class Simulation
                         }
                         else
                         {
+                            for (int k = 0; k < stopName.size(); k++)
+                            {
+                                if (runningStopTimes.get(i).equals(stopID.get(k)))
+                                {
+                                    System.out.println(stopName.get(k) + " - " + runningDepTimes.get(i).toString());
+                                }
+                            }
                             startTimeInput = runningDepTimes.get(i);
                         }
                     }
