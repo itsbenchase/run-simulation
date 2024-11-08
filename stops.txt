@@ -1,6 +1,6 @@
 stop_id,stop_name,stop_lat,stop_lon
-1,test 1,41.925351,-87.654818
-2,test 2,41.925265,-87.658445
-3,test 3,41.925207,-87.663336
-4,test 4,41.925174,-87.668149
-5,test 5,41.925136,-87.672947
+1,test 1,xx.xxxxxx,xx.xxxxxx
+2,test 2,xx.xxxxxx,xx.xxxxxx
+3,test 3,xx.xxxxxx,xx.xxxxxx
+4,test 4,xx.xxxxxx,xx.xxxxxx
+5,test 5,xx.xxxxxx,xx.xxxxxx
