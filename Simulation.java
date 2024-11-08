@@ -227,18 +227,21 @@ public class Simulation
         }
 
         // stop times during running trips
-        for (int i = 0; i < runningTrips.size(); i++)
+        int timeSize = tripIDtimes.size();
+        for (int i = 0; i < timeSize; i++)
         {
-            for (int j = 0; j < tripIDtimes.size(); j++)
+            if (runningTrips.contains(tripIDtimes.get(i)))
             {
-                if (tripIDtimes.get(j).equals(runningTrips.get(i)))
-                {
-                    runningDepTimes.add(departuretimes.get(j));
-                    runningStopTimes.add(stopIDtimes.get(j));
-                    runningTripTimes.add(tripIDtimes.get(j));
-                }
+                runningDepTimes.add(departuretimes.get(i));
+                runningStopTimes.add(stopIDtimes.get(i));
+                runningTripTimes.add(tripIDtimes.get(i));
             }
-        }
+
+            if ((i % 100000) == 0)
+            {
+                System.out.println("Progress: " + i);
+            }
+        } 
 
         System.out.print("Enter Start Time: ");
         startTimeInput = in.nextLine();
@@ -255,6 +258,11 @@ public class Simulation
             {
                 if (runningStopTimes.get(i).equals(legStart.get(j)))
                 {
+                    // times after midnight
+                    if (Integer.parseInt(runningDepTimes.get(i).substring(0, 2)) >= 24)
+                    {
+                        runningDepTimes.set(i, "0" + (Integer.parseInt(runningDepTimes.get(i).substring(0, 2)) - 24) + runningDepTimes.get(i).substring(2));
+                    }
                     LocalTime compareTime = LocalTime.parse(runningDepTimes.get(i));
                     // 0 is equal time, 1 is time before, -1 is time after
                     int compValue = startTime.compareTo(compareTime);
