@@ -171,13 +171,34 @@ public class Simulation
 
         try
         {
-            Scanner s = new Scanner(new File("run_" + runId + ".txt"));
+            Scanner s = new Scanner(new File("runs.txt"));
             while (s.hasNextLine())
             {
                 String data = s.nextLine();
-                legStart.add(data.substring(0, data.indexOf(",")));
-                data = data.substring(data.indexOf(",") + 1);
-                legEnd.add(data);
+                if (data.substring(0, data.indexOf(",")).equals(runId))
+                {
+                    data = data.substring(data.indexOf(",") + 1); // skip past run ID
+                    date = Integer.parseInt(data.substring(0, data.indexOf(",")));
+                    data = data.substring(data.indexOf(",") + 1);
+                    dayOfWeek = Integer.parseInt(data.substring(0, data.indexOf(",")));
+                    data = data.substring(data.indexOf(",") + 1);
+                    startTimeInput = data.substring(0, data.indexOf(","));
+                    data = data.substring(data.indexOf(",") + 1);
+                    while (data.indexOf(",") != -1)
+                    {
+                        legStart.add(data.substring(0, data.indexOf(",")));
+                        data = data.substring(data.indexOf(",") + 1);
+                        if (data.indexOf(",") != -1)
+                        {
+                            legEnd.add(data.substring(0, data.indexOf(",")));
+                            data = data.substring(data.indexOf(",") + 1);
+                        }
+                        else
+                        {
+                            legEnd.add(data);
+                        }
+                    }
+                }
             }
         }
         catch (Exception e)
@@ -187,14 +208,6 @@ public class Simulation
 
         // prompt for day of week (this is something ran internally by staff, so don't stress with formatting)
         // prompt for start time (run_0001 test time is 06:49)
-
-        System.out.print("Enter Date: ");
-        date = in.nextInt();
-
-        System.out.print("Enter Day of Week: ");
-        dayOfWeek = in.nextInt();
-
-        in.nextLine(); // absorb enter
 
         // stop_times and trip imports based on what is running that day
         ArrayList<String> runningServices = new ArrayList<String>();
@@ -243,8 +256,6 @@ public class Simulation
             }
         } 
 
-        System.out.print("Enter Start Time: ");
-        startTimeInput = in.nextLine();
         String ogStartTime = "no data"; // for end of program
         String endTime = "no data"; // only used for last leg
 
